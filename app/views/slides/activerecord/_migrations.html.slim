@@ -1,0 +1,35 @@
+| #TODO baixar o highlight p/ BASH.
+.step.slide#ar-migrations[data-x=x_succ data-y=0]
+  q
+    span AR 
+    small migrações
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="bash"]
+        | rails g model House address:string price:integer
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | #TODO migração aqui
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="bash"]
+        | rails g migration add_area_to_houses area:integer
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | #TODO migração aqui
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | #TODO falar sobre FKs?

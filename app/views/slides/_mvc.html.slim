@@ -1,0 +1,37 @@
+.step.slide#mvc[data-x=x_succ data-y=0]
+  q
+    span MVC 
+    small movimento veicular contínuo?
+
+.step.slide[data-x=x_succ data-y=0]
+  ul[style="font-size:3em;line-height:2em"]
+    li Model
+    li View
+    li Controller
+
+.step.slide[data-x=x_succ data-y=0]
+  h1[style="font-size:3em;"] Model
+  br
+  p Responde pelos dados. Pode conectar com bancos de dados, ou acessar informações de outras fontes.
+  br
+  p Em Rails, os models <i>geralmente</i> extendem ActiveRecord::Base. ActiveRecord é um ORM (Object Relational Mapping).
+  br
+  p Segue-se a filosofia "fat model".
+
+.step.slide[data-x=x_succ data-y=0]
+  h1[style="font-size:3em;"] Controller
+  br
+  p É quem recebe as chamadas dos usuários por meio de uma URL e define quais informações estarão disponíveis (geralmente utilizando models) e qual a view que apresentará estas informações.
+  br
+  p Segue-se a filosofia "skinny controller". Também busca-se entender controllers como interfaces para "resources". Falaremos mais disso adiante.
+
+.step.slide[data-x=x_succ data-y=0]
+  h1[style="font-size:3em;"] View
+  br
+  p É o "template". Recebe informações definidas pelos controllers e as apresenta.
+  br
+  p O padrão do Rails é utilizar o formato ERB (Embedded Ruby). ERB é semelhante à JSP ou PHP, trabalhando com tags especiais (e.g. <%= %>) colocadas dentro do HTML.
+  p Existem diversas outras bibliotecas para trabalhar com views, como <a href="#TODO" target="_blank">SLIM</a>,  <a href="#TODO" target="_blank">HAML</a>,  <a href="#TODO" target="_blank">Mustache</a>,  <a href="#TODO" target="_blank">Erector</a>, entre outras.
+
+.step.slide[data-x=x_succ data-y=0]
+  | #TODO diagrama de passagem de dados M<-C->V

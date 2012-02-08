@@ -1,0 +1,24 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    title Ruby1.9 Intro
+    meta name="description" content="Apresentação sobre Ruby 1.9 usando impress.js"
+    meta name="author" content="Juan Maiz"
+    link href="http://fonts.googleapis.com/css?family=Flamenco|Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet"
+    = stylesheet_link_tag "impress"
+    = javascript_include_tag "highlight.pack"
+    = stylesheet_link_tag "highlight/default"    
+    = stylesheet_link_tag "highlight/solarized_light"
+    javascript:
+      // inits code highlight
+      hljs.initHighlightingOnLoad();
+      console.log(hljs)
+  body
+    #impress.impress-not-supported
+      .fallback-message
+        p Seu navegador <b>não suporta</b> o impress.js. Abaixo uma versão simplificada da apresentação.
+        p Instale o <b>Chrome</b>, o <b>Safari</b> ou o Firefox 10
+      = yield
+    = javascript_include_tag "impress"
+      

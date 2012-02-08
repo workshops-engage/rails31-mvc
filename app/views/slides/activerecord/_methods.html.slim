@@ -1,0 +1,90 @@
+.step.slide#ar-methods[data-x=x_succ data-y=0]
+  q
+    span AR 
+    small métodos fundamentais
+
+/ Creating
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Criando
+          House.create area: 350, price: 800_000, address: "Rua Liberdade, 553"
+
+/ Selecting
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Buscando tudo do banco
+          House.all
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Condições
+          House.where("area > 100").all
+          House.where("area > ?", area).all
+          House.where(area: area).all
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Ordenando
+          House.order(:area).all
+          House.order(:price).all
+          House.order("price desc").all
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Limites e offsets
+          House.limit(5).all
+          House.limit(5).offset(5).all
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Juntando tudo...
+          House.where("area > 100").order("price desc").limit(5).all
+
+| #TODO colocar joins depois, pois ainda não mostrei relacionamentos
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Buscando apenas um por id
+          House.find(5)
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Buscando apenas 1
+          House.first
+          House.last
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Buscando apenas 1, v2
+          House.where("area > 100").order("price desc").first
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Buscando apenas 1, v2
+          House.where("area > 100").order("price desc").first
+
+/ Updating
+
+/ Deleting
