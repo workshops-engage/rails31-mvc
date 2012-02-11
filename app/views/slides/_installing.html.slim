@@ -1,8 +1,34 @@
 .step.slide#installing[data-x=x_succ data-y=0]
   q
     span Instalando 
-    small #TODO
+    small
+      ul
+        li Postgres
+        li RVM
+        li Bundler
 
-.step.slide[data-x=x_succ data-y=0]
-  p Peter! Tem q fazer o bootstrap completo, Rails + Banco.
-  p Seria legal explicar pra que serve o bundler also.
+.step.slide#installing_postgres[data-x=x_succ data-y=0]
+  q
+    span Instalando o Postgres
+    small
+      ul
+        li aptitude install postgresql-9.1
+        li http://postgresql.org/download/macosx/
+        li http://postgresql.org/download/windows/
+
+.step.slide#rvm[data-x=x_succ data-y=0]
+  q
+    =image_tag 'rvm.png'
+    h1 
+      | Instalando RVM 
+      small beginrescueend.com
+    br
+    p[style="font-size:0.4em"]
+        | Does RVM work on windows? Will it in the future? NO.
+        br
+        | for windows: github.com/vertiginous/pik/ or rubyinstaller.org
+
+
+.step.slide#bundler[data-x=x_succ data-y=0]
+  q
+    h2 gem install bundler --no-ri --no-rdoc
