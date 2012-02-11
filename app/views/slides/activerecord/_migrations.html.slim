@@ -1,4 +1,3 @@
-| #TODO baixar o highlight p/ BASH.
 .step.slide#ar-migrations[data-x=x_succ data-y=0]
   q
     span AR 
@@ -6,30 +5,45 @@
 
 .step.slide.shell[data-x=x_succ data-y=0]
   q
-    pre
-      code[class="bash"]
-        | rails g model House address:string price:integer
+    pre[style="font-size:0.7em"]
+      | rails g model House address:string price:integer
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
-        | #TODO migração aqui
+      code[class="ruby" style="font-size:0.6em; line-height: 1.6em"]
+        | class CreateHouses < ActiveRecord::Migration
+            def change
+              create_table :houses do |t|
+                t.string :address
+                t.integer :price
+
+                t.timestamps
+              end
+            end
+          end
 
 .step.slide.shell[data-x=x_succ data-y=0]
   q
     pre
-      code[class="bash"]
-        | rails g migration add_area_to_houses area:integer
+      | rake db:migrate
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre[style="font-size: 0.7em"]
+      | rails g migration add_area_to_houses area:integer
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
-        | #TODO migração aqui
+      code[class="ruby" style="font-size:0.55em;"]
+        | class AddAreaToHouses < ActiveRecord::Migration
+            def change
+              add_column :houses, :area, :integer
+            end
+          end
 
-.step.slide.code[data-x=x_succ data-y=0]
+.step.slide.shell[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
-        | #TODO falar sobre FKs?
+      | rake db:migrate

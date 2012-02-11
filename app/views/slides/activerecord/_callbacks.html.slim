@@ -1,0 +1,52 @@
+.step.slide#ar-callbacks[data-x=x_succ data-y=0]
+  q
+    span AR 
+    small callbacks
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em; line-height: 1.6em"]
+        | after_create :send_welcome_email
+          def send_welcome_email
+            WelcomeMailer.welcome(self).deliver
+          end
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.6em; line-height: 1.6em"]
+        | has_many :moves
+          after_update :register_move
+          def register_move
+            if changes.state_changed?
+              moves.create(
+                from: changes[:state][0],
+                to: changes[:state][1])
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | Client.all
+    div[style="font-size:0.5em"] # SELECT "clients".* FROM "clients"
+    pre
+      code[class="ruby"]
+        | Client.from_south
+    div[style="font-size:0.5em"] SELECT "clients".* FROM "clients" WHERE "clients"."state" IN ('rs', 'sc', 'pr')
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.65em; line-height: 1.6em"]
+        | class Client < ActiveRecord::Base
+            scope :latest, order("created_at desc")
+            scope :five, limit(5)
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em;"]
+        | Client.latest.five.from_south

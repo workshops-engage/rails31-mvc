@@ -1,0 +1,294 @@
+.step.slide#ar-validations[data-x=x_succ data-y=0]
+  q
+    span AR 
+    small validações
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | rails g model Client
+          name:string
+          email:string
+          age:integer
+          state:string
+          password:string
+          terms:boolean
+
+= render 'helpers/migrate'
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Problem
+          Client.new.valid? #true
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.5em; line-height: 1.6em"]
+        | class ClientTest < ActiveSupport::TestCase
+            test "validates presence of name" do
+              client = Client.new name: nil
+              assert ! client.valid?, "client should be invalid"
+              assert client.errors[:name].any?
+            end
+          end
+
+= render 'helpers/prepare'
+= render partial: 'helpers/test_file', locals: {test_file: "unit/client_test"}
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    div[style="font-size:0.8em; line-height: 1.3em"]
+      | 1) Failure:
+          test_validates_presence_of_name(ClientTest) [test/unit/client_test.rb:6]:
+          client should be invalid
+    = image_tag "okay-guy.jpg", style: "float:right"
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em; line-height: 1.6em"]
+        | class Client < ActiveRecord::Base
+            validates :name, presence: true
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | client = Client.new
+          client.valid? #false
+          client.errors[:name]
+    | => ["can't be blank"]
+
+= render partial: 'helpers/test_file', locals: {test_file: "unit/client_test"}
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | 1 tests, 2 assertions,
+        0 failures, 0 errors, 0 skips
+    = image_tag "troll-happy.jpg", style: "float:right"
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:3em;line-height:1.4em; color: red"] A SEGUIR UMA SEQUÊNCIA DE SLIDES ESTRANHOS
+  h2 = link_to "música de fundo", "http://grooveshark.com/s/Stravinsky+Igor+Rite+Of+Spring/ei1kY?src=5", target: :_blank
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:13em;line-height:1.4em; color: red"] TDD
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:8em;line-height:2.4em; color: red"] ROCKS
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:10em;line-height:1.9em; color: red"] HARD
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:9em;line-height:2.1em; color: green"] #FACT
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:3.5em;line-height:1.1em; color: blue"] 1o MANDAMENTO DO PROGRAMADOR RAILS:
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:5em;line-height:1.4em; color: #f0f"] 1) THOU SHALT DO THY TDD
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:9em;line-height:2.1em; color: green"] #FACT
+
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:3em;line-height:1.4em; color: red"] FIM DA SEQUÊNCIA DE SLIDES ESTRANHOS
+  h2 Tire a música
+.step.slide.code[data-x=x_succ data-y=0]
+  h1[style="font-size:3em;line-height:1.4em; color: red"] ESTRANHOS, PORÉM RELEVANTES
+  h2 Mas se quiser pode continuar ouvindo
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates presence of email" do
+            client = Client.new email: nil
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:email].any?
+          end
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates format of email" do
+            client = Client.new email: "invalid"
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:email].any?
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.7em; line-height: 2em"]
+        | def create_client
+            Client.create! name: "John",
+              email: "john@gmail.com",
+              password: 'tre543%$#',
+              password_confirmation: 'tre543%$#'
+          end
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates uniqueness of email" do
+            create_client
+            client = Client.create email: "john@gmail.com"
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:email].any?
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.8em"]
+        | validates :email,
+            presence: true,
+            uniqueness: true,
+            format: {with: /\w+@gmail\.com/}
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates inclusion of state" do
+            client = Client.new state: 'xx'
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:state].any?
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.8em"]
+        | validates :state,
+            inclusion: {
+              in: %w[rs sp rj],
+              allow_nil: true
+            }
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates numericality of age" do
+            client = Client.new age: "not a number"
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:age].any?
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates minimum age" do
+            client = Client.new age: 17
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:age].any?
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        |  validates :age,
+            numericality: {
+              greater_than: 17,
+              only_integer: true,
+              allow_nil: true
+            }
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates confirmation of password - nil" do
+            client = Client.new password: 'hgf654^%$',
+                          password_confirmation: nil
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:password_confirmation].any?
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        |  validates :password,
+            presence: true,
+            confirmation: true
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates confirmation of password - wrong" do
+            client = Client.new password: 'hgf654^%$', 
+                      password_confirmation: 'wrong'
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:password].any?
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.8em"]
+        |  validates :password_confirmation,
+            :presence => true
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height: 2em"]
+        | test "validates strenght of password" do
+            client = Client.new password: '111111', 
+                    password_confirmation: '111111'
+            assert ! client.valid?, "client should be invalid"
+            assert client.errors[:password].any?
+            assert_equal "too weak", client.errors[:password]
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.5em; line-height:1.8em"]
+        | protected
+          validate :strength_of_password
+          def strength_of_password
+            return unless password
+            if password.count(password[0]) == password.length
+              errors.add(:password, "too weak")
+            end
+          end
+
+- guides = "http://guides.rubyonrails.org/active_record_validations_callbacks.html"
+.step.slide[data-x=x_succ data-y=0 style="font-size:2.6em; line-height: 2em"]
+  q
+    p Mais:   
+  = link_to raw("http://guides.rubyonrails.org/<br />active_record_validations_callbacks.html"), guides
+
+
+.step.slide.exercise[data-x=x_succ data-y=0]
+  = image_tag 'http://cdn1.iconfinder.com/data/icons/oldschool_babasse/Png/Hardware/ordinateur%20off.png'
+  q[style="font-size:1.1em"]
+    | Melhor o teste que verifica a força da senha e implemente o código no modelo. Exs:
+    pre
+      code[class="ruby" style="line-height:1.2em; font-size: 0.6em"]
+        | "jhbds" # apenas 5 caracteres
+          "111111", "aaaaaa" # repetições
+          "123456", "abcdef" # sequências
+          "ksjffj" # falta de números, caracteres especiais e maiúsculas
+
+    pre
+      code[class="ruby" style="line-height:1.2em"]
+        | "jJ3#h4!" # ok!
+
+.step.slide.exercise[data-x=x_succ data-y=0]
+  = image_tag 'http://cdn1.iconfinder.com/data/icons/oldschool_babasse/Png/Hardware/ordinateur%20off.png'
+  q
+    | Pense qual o primeiro modelo que você precisa para sua <i>killer app</i>, implemente os testes para as validações depois implemente o código. (1o mandamento)
