@@ -57,7 +57,7 @@
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby" style="font-size:0.8em"]
+      code[class="ruby" style="font-size:0.65em; line-height: 2em"]
         | client = Client.find(10)
           order = client.orders.create
           product = Product.find(20)
@@ -76,3 +76,8 @@
             end
           end
           order.total
+
+.step.slide.exercise[data-x=x_succ data-y=0]
+  = image_tag 'http://cdn1.iconfinder.com/data/icons/oldschool_babasse/Png/Hardware/ordinateur%20off.png'
+  q
+    | Pense que outros modelos estão relacionados em seu projeto. Teste e implemente.

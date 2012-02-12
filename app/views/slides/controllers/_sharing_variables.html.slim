@@ -1,0 +1,113 @@
+.step.slide#controller-sharing-variables[data-x=x_succ data-y=0]
+  q
+    span Controles 
+    small repassando variáveis
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | rails g controller Hello show
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em"]
+        | YourApp::Application.routes.draw do
+            get "hello/show"
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.6em"]
+        | class HelloController < ApplicationController
+            def show
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | def show
+            @name = "John"
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.6em"]
+        | &lt;h1>Hello#show&lt;/h1>
+          &lt;p>Find me in app/views/hello/show.html.erb&lt;/p>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml"]
+        | &lt;h1>Hello <%= @name %>&lt;/h1>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | def show
+            @name = params[:name]
+          end
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | rails g controller Product \
+          index show
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.75em"]
+        | YourApp::Application.routes.draw do
+            resources :products, 
+              only: %w[index show]
+            root to: "products#index"
+          end
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.55em"]
+        | class ProductController < ApplicationController
+            def index
+              @products = Product.all
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.7em; line-height: 1.4em"]
+        |
+          &lt;ul id="products">
+            <% for product in @products %>
+              &lt;li><%= link_to product.name,
+                product %>&lt;/li>
+            <% end %>
+          &lt;/ul>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em"]
+        |
+          def show
+            @product = Product.find(params[:id])
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.5em; line-height: 1.8em"]
+        |
+          &lt;h1><%= @product.name %>&lt;/h1>
+          &lt;p><%= number_to_currency @product.price %>&lt;/p>
+          <%= form_for OrderItem.new do |f| %>
+            Qtd:<%= f.text_field :quantity, value: 1, size: 4 %>
+            <%= f.hidden_field :product_id, value: @product.id %>
+            <%= f.submit "Comprar" %>
+          <% end %>

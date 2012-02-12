@@ -1,4 +1,7 @@
 class Client < ActiveRecord::Base
+  def self.auth data
+    find_by_email_and_password data[:email], data[:password]
+  end
 
   has_many :orders
 
@@ -20,4 +23,5 @@ class Client < ActiveRecord::Base
       errors.add(:password, "too weak")
     end
   end
+
 end

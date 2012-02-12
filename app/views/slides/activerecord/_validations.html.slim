@@ -6,12 +6,12 @@
 .step.slide.shell[data-x=x_succ data-y=0]
   q
     pre
-      | rails g model Client
-          name:string
-          email:string
-          age:integer
-          state:string
-          password:string
+      | rails g model Client \
+          name:string \
+          email:string \
+          age:integer \
+          state:string \
+          password:string \
           terms:boolean
 
 = render 'helpers/migrate'

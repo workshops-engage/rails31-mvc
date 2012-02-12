@@ -6,7 +6,9 @@
 .step.slide.shell[data-x=x_succ data-y=0]
   q
     pre[style="font-size:0.7em"]
-      | rails g model House address:string price:integer
+      | rails g model House \
+          address:string \
+          price:integer
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
@@ -23,15 +25,13 @@
             end
           end
 
-.step.slide.shell[data-x=x_succ data-y=0]
-  q
-    pre
-      | rake db:migrate
+= render 'helpers/migrate'
 
 .step.slide.shell[data-x=x_succ data-y=0]
   q
-    pre[style="font-size: 0.7em"]
-      | rails g migration add_area_to_houses area:integer
+    pre[style="font-size: 0.8em"]
+      | rails g migration add_area_to_houses \
+          area:integer
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
@@ -43,7 +43,4 @@
             end
           end
 
-.step.slide.shell[data-x=x_succ data-y=0]
-  q
-    pre
-      | rake db:migrate
+= render 'helpers/migrate'

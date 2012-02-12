@@ -1,0 +1,30 @@
+.step.slide#controller-filters[data-x=x_succ data-y=0]
+  q
+    span Controles 
+    small filtros & helper methods
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.5em; line-height:1.5em"]
+        | class ApplicationController < ActionController::Base
+            protect_from_forgery
+            protected
+            helper_method :current_client
+            def current_client
+              @current_client ||=
+                Client.find(session[:client_id]) rescue nil
+            end
+            before_filter :auth
+            def auth
+              redirect_to new_session_path unless current_client
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.55em; line-height:1.5em"]
+        | class SessionsController < ApplicationController
+            skip_before_filter :auth
+          end
