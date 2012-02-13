@@ -9,7 +9,8 @@
 
 .step.slide#installing_postgres[data-x=x_succ data-y=0]
   q
-    span Instalando o Postgres
+    = image_tag 'postgres.png', :style => 'width: 222px; height: 229px'
+    h1 Instalando o Postgres
     small
       ul
         li aptitude install postgresql-9.1
@@ -20,7 +21,6 @@
   q
     =image_tag 'rvm.png'
     h1 
-      | Instalando RVM 
       small beginrescueend.com
     br
     p[style="font-size:0.4em"]
@@ -29,6 +29,21 @@
         | for windows: github.com/vertiginous/pik/ or rubyinstaller.org
 
 
-.step.slide#bundler[data-x=x_succ data-y=0]
+.step.slide#installing_bundler[data-x=x_succ data-y=0]
   q
-    h2 gem install bundler --no-ri --no-rdoc
+    = image_tag 'bundler.png'
+    small
+      i $ gem install bundler 
+
+.step.slide#installing_rails[data-x=x_succ data-y=0]
+  q
+    = image_tag 'rails_logo.png'
+    h1 
+      i $ gem install rails
+
+.step.slide#installing_rails2[data-x=x_succ data-y=0]
+  q
+    = image_tag 'ruby_on_rails_logo.jpg', :style => 'width: 318px; height:425px;'
+    h1 
+      i $ gem install rails
+  
