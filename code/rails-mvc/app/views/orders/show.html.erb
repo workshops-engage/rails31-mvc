@@ -1,0 +1,24 @@
+<h1>Meu pedido</h1>
+<%= link_to "Voltar para a loja", root_path %>
+<br />
+<%= flash[:notice] %>
+<table id="items" border="1">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Produto</th>
+      <th>$</th>
+      <th>Qtd</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render current_order.order_items %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4"></td>
+      <td><%= number_to_currency current_order.total %></td>
+    </tr>
+  </tfoot>
+</table>

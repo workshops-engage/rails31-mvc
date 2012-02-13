@@ -1,0 +1,35 @@
+.step.slide#sass[data-x=x_succ data-y=0]
+  q
+    span SASS 
+    small improved css
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | #application.css
+          /*
+           *= require_self
+           *= require_tree . 
+          */
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.5em; line-height: 1.2em"]
+        | $orange: #ffeeaa;
+
+          @mixin border-radius($rad){
+            border-radius: $rad;
+            -moz-border-radius: $rad;
+            -webkit-border-radius: $rad;
+          }
+
+          body{
+            color: darken($orange, 60%);
+
+            header{
+              @include border-radius(2em);
+              background: lighten($orange, 10%);
+              padding: 10px;
+            }
+          }

@@ -1,0 +1,17 @@
+$orange: #ffeeaa;
+
+@mixin border-radius($rad){
+  border-radius: $rad;
+  -moz-border-radius: $rad;
+  -webkit-border-radius: $rad;
+}
+
+body{
+  color: darken($orange, 60%);
+
+  header{
+    @include border-radius(2em);
+    background: lighten($orange, 10%);
+    padding: 10px;
+  }
+}

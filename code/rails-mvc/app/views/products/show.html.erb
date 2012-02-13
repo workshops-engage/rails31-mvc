@@ -1,0 +1,13 @@
+<%= content_for :breadcrumb do %>
+  <ul id="breadcrumbs">
+    <li><%= link_to "Produtos", root_path %></li>
+    <li><%= link_to @product.name, @product %></li>
+  </ul>
+<% end %>
+<h1><%= @product.name %></h1>
+<p><%= number_to_currency @product.price %></p>
+<%= form_for OrderItem.new() do |f| %>
+  Qtd:<%= f.text_field :quantity, value: 1, size: 4 %>
+  <%= f.hidden_field :product_id, value: @product.id %>
+  <%= f.submit "Comprar" %>
+<% end %>

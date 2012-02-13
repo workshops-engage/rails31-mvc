@@ -1,0 +1,53 @@
+.step.slide#views-collections[data-x=x_succ data-y=0]
+  q
+    span Views 
+    small render collection
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.5em; line-height: 1.8em"]
+        |
+          &lt;ul id="products">
+            <% for product in @products %>
+              &lt;li><%= link_to product.name, product %>&lt;/li>
+            <% end %>
+          &lt;/ul>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.5em; line-height: 1.8em"]
+        |
+          &lt;ul id="products">
+            <%= render @products %>
+          &lt;/ul>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.5em; line-height: 1.8em"]
+        | # app/views/products/_product.html.erb
+          &lt;li><%= link_to product.name, product %>&lt;/li>
+
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.5em; line-height: 1.8em"]
+        | # app/views/orders/show.html.erb
+          <%= render current_order.order_items %>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.5em; line-height: 1.8em"]
+        |
+          &lt;tr>
+            &lt;td><%= link_to "excluir", order_item,
+              method: :delete, style: "color:red" %>&lt;/td>
+            &lt;td><%= order_item.product.name %>&lt;/td>
+            &lt;td><%= number_to_currency order_item.price %>&lt;/td>
+            &lt;td><%= order_item.quantity %>&lt;/td>
+            &lt;td><%= number_to_currency order_item.total %>&lt;/td>
+          &lt;/tr>

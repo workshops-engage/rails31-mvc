@@ -1,0 +1,83 @@
+.step.slide#ar-relationships[data-x=x_succ data-y=0]
+  q
+    span AR 
+    small relacionamentos
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | rails g model Product \
+          name:string \
+          price:float
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | rails g model Order \
+          client:references
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | rails g model OrderItem \
+          order:references \
+          product:references \
+          quantity:integer \
+          price:float \
+          total:float
+
+= render 'helpers/migrate'
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em"]
+        | class Client < ActiveRecord::Base
+            has_many :orders
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em"]
+        | class Order < ActiveRecord::Base
+            belongs_to :client
+            has_many :order_items
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em"]
+        | class OrderItem < ActiveRecord::Base
+            belongs_to :order
+            belongs_to :product
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.65em; line-height: 2em"]
+        | client = Client.find(10)
+          order = client.orders.create
+          product = Product.find(20)
+          order.order_items.create product: product,
+            price: product.price,
+            quantity: 10,
+            total: product.price * 10
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em"]
+        | class Order < ActiveRecord::Base
+            def total
+              order_items.sum &:total
+            end
+          end
+          order.total
+
+.step.slide.exercise[data-x=x_succ data-y=0]
+  = image_tag 'http://cdn1.iconfinder.com/data/icons/oldschool_babasse/Png/Hardware/ordinateur%20off.png'
+  q
+    | Pense que outros modelos estão relacionados em seu projeto. Teste e implemente.

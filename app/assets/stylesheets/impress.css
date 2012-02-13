@@ -528,6 +528,17 @@ small{
   background: #FDF6E3;
 }
 
+.slide.shell{
+  background: #222;
+  color: #eee;
+  word-spacing: 10px;
+}
+
 pre code{
   font-family: 'Monaco' !important;
+}
+
+span.vbscript{
+  opacity: 1 !important;
+  color: #e60;
 }

@@ -1,0 +1,46 @@
+.step.slide#i18n[data-x=x_succ data-y=0]
+  q
+    span i18n 
+    small ("nternationalizatio".size)
+
+.step.slide[data-x=x_succ data-y=0]
+  q[style="font-size:0.9em"]
+    h1[style="font-size: 2em"] baixar i18n em
+    span = link_to nil, "https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale"
+        
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.6em"]
+        | module YourApp
+            class Application < Rails::Application
+              config.time_zone = 'Brasilia'
+              config.i18n.default_locale = :"pt-BR"
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.6em; line-height: 1.6em"]
+        | #test/functionals/orders_controller_test.rb
+          test "should get show" do
+            ...
+            assert_select "td", /0,2/
+            assert_select "td", /0,3/
+            assert_select "td", /0,5/
+            ...
+          end
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | rake test
+
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    | ...........................................................
+      ...........................................................
+    = image_tag "troll-happy.jpg", style: "float:right"

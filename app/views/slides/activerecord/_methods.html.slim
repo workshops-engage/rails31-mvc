@@ -8,9 +8,22 @@
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
-        | # Criando
-          House.create area: 350, price: 800_000, address: "Rua Liberdade, 553"
+      code[class="ruby" style="font-size: 0.85em"]
+        | # Criando com create
+          House.create area: 350,
+            price: 800_000,
+            address: "Rua Liberdade, 553"
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.75em"]
+        | # Criando com new
+          house = House.new
+          house.area = 350
+          house.price = 800_000
+          house.address = "Rua Liberdade, 553"
+          house.save
 
 / Selecting
 
@@ -24,7 +37,7 @@
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
+      code[class="ruby" style="font-size:0.8em"]
         | # Condições
           House.where("area > 100").all
           House.where("area > ?", area).all
@@ -33,7 +46,7 @@
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
+      code[class="ruby" style="font-size:0.9em"]
         | # Ordenando
           House.order(:area).all
           House.order(:price).all
@@ -42,7 +55,7 @@
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
+      code[class="ruby" style="font-size:0.9em"]
         | # Limites e offsets
           House.limit(5).all
           House.limit(5).offset(5).all
@@ -52,9 +65,10 @@
     pre
       code[class="ruby"]
         | # Juntando tudo...
-          House.where("area > 100").order("price desc").limit(5).all
-
-| #TODO colocar joins depois, pois ainda não mostrei relacionamentos
+          House.where("area > 100")
+            .order("price desc")
+            .limit(5)
+            .all
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
@@ -67,7 +81,7 @@
   q
     pre
       code[class="ruby"]
-        | # Buscando apenas 1
+        | # Buscando primeiro/último
           House.first
           House.last
 
@@ -75,16 +89,81 @@
   q
     pre
       code[class="ruby"]
-        | # Buscando apenas 1, v2
-          House.where("area > 100").order("price desc").first
+        | # Buscando o 1o c/ filtros
+          House.where("area > 100")
+            .order("price desc")
+            .first
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
       code[class="ruby"]
-        | # Buscando apenas 1, v2
-          House.where("area > 100").order("price desc").first
+        | # Buscando o último
+          House.where("area > 100")
+            .order("price desc")
+            .last
 
 / Updating
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.85em"]
+        | # Atualizando c/ save
+          House.update_all(price: 10_000)
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.85em"]
+        | # Atualizando c/ save
+          House.update(10, price: 10_000)
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Atualizando c/ save
+          house = House.find(10)
+          house.price = 10_000
+          house.save
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em"]
+        | # Atualizando
+          h = House.find(10)
+          h.update_attribute :price, 10_000
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em"]
+        | # Atualizando
+          h = House.find(10)
+          h.update_attributes price: 10_000, 
+                              area: 100
 
 / Deleting
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Hecatombe
+          House.destroy_all
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Um
+          House.destroy(10)
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | # Excluir um
+          house = House.find(10)
+          house.destroy

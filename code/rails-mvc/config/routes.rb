@@ -1,4 +1,15 @@
 RailsMvc::Application.routes.draw do
+  get "orders/show"
+
+  resources :order_items, only: %w[create destroy]
+  resources :sessions, only: %w[new create destroy]
+  resources :products, only: %w[index show]
+  resources :orders, only: %w[show destroy]
+
+  get "hello/show"
+
+  root to: "products#index" #added
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
