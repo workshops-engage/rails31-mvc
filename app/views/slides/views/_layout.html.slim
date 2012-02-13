@@ -1,0 +1,65 @@
+.step.slide#views-layout[data-x=x_succ data-y=0]
+  q
+    span Views 
+    small layout, yield & partials
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.5em; line-height: 1.5em"]
+        |
+          &lt;!DOCTYPE html>
+          &lt;html>
+            &lt;head>
+              &lt;title>YourApp&lt;/title>
+              <%= stylesheet_link_tag "application" %>
+              <%= javascript_include_tag "application" %>
+              <%= csrf_meta_tags %>
+            &lt;/head>
+            &lt;body>
+              <%= yield %>
+            &lt;/body>
+          &lt;/html>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.8em;"]
+        | &lt;body>
+            <%= render 'layouts/header' %>
+            <%= yield :breadcrumb %>
+            <%= yield %>
+            <%= render 'layouts/footer' %>
+          &lt;/body>
+          
+a
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.8em;"]
+        |
+          &lt;header>
+            &lt;h1>Simple ecommerce&lt;/h1>
+          &lt;/header>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.8em;"]
+        |
+          &lt;footer>
+            &lt;p>&reg; 2012 Rails Workshops
+                @ engage.is&lt;/p>
+          &lt;/footer>
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="xml" style="font-size:0.5em;"]
+        |
+          <%= content_for :breadcrumb do %>
+            &lt;ul id="breadcrumbs">
+              &lt;li><%= link_to "Produtos", root_path %>&lt;/li>
+              &lt;li><%= link_to @product.name, @product %>&lt;/li>
+            &lt;/ul>
+          <% end %>

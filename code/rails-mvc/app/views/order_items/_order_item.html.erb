@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to "excluir", order_item, method: :delete, style: "color:red" %></td>
+  <td><%= order_item.product.name %></td>
+  <td><%= number_to_currency order_item.price %></td>
+  <td><%= order_item.quantity %></td>
+  <td><%= number_to_currency order_item.total %></td>
+</tr>

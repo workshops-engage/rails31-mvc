@@ -1,3 +1,17 @@
-// Place all the styles related to the Orders controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$orange: #ffeeaa;
+
+@mixin border-radius($rad){
+  border-radius: $rad;
+  -moz-border-radius: $rad;
+  -webkit-border-radius: $rad;
+}
+
+body{
+  color: darken($orange, 60%);
+
+  header{
+    @include border-radius(2em);
+    background: lighten($orange, 10%);
+    padding: 10px;
+  }
+}

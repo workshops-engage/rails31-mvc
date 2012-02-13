@@ -1,49 +1,39 @@
+# encoding: UTF-8
 require 'test_helper'
 
 class OrderItemsControllerTest < ActionController::TestCase
+
   setup do
-    @order_item = order_items(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:order_items)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
+    @client = Client.create name: "John", email: "john@gmail.com", password: 'tre543%$#', password_confirmation: 'tre543%$#'
+    @order = @client.orders.create
+    @product = Product.create name: 'Xaxá', price: 0.2
+    session[:client_id] = @client.id
+    session[:order_id] = @order.id
   end
 
   test "should create order_item" do
     assert_difference('OrderItem.count') do
-      post :create, order_item: @order_item.attributes
+      post :create, order_item: {product_id: @product.id, quantity: 1}
     end
 
-    assert_redirected_to order_item_path(assigns(:order_item))
-  end
-
-  test "should show order_item" do
-    get :show, id: @order_item.to_param
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @order_item.to_param
-    assert_response :success
+    assert_redirected_to order_path(@order)
   end
 
   test "should update order_item" do
-    put :update, id: @order_item.to_param, order_item: @order_item.attributes
-    assert_redirected_to order_item_path(assigns(:order_item))
-  end
+    @order.order_items.create product: @product, quantity: 1
+    assert_no_difference('OrderItem.count') do
+      post :create, order_item: {product_id: @product.id, quantity: 10}
+    end
 
+    assert_redirected_to order_path(@order)
+    assert_equal 10, @order.order_items.first.quantity
+  end
   test "should destroy order_item" do
+    @order_item = @order.order_items.create product: @product, quantity: 1
     assert_difference('OrderItem.count', -1) do
       delete :destroy, id: @order_item.to_param
     end
 
-    assert_redirected_to order_items_path
+    assert_redirected_to order_path(@order)
   end
 end

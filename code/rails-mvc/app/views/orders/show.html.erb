@@ -3,24 +3,22 @@
 <br />
 <%= flash[:notice] %>
 <table id="items" border="1">
-  <tr>
-    <th></th>
-    <th>Produto</th>
-    <th>$</th>
-    <th>Qtd</th>
-    <th>Total</th>
-  </tr>
-  <% for item in current_order.order_items %>
+  <thead>
     <tr>
-      <td><%= link_to "excluir", item, method: :delete, style: "color:red" %></td>
-      <td><%= item.product.name %></td>
-      <td><%= number_to_currency item.price %></td>
-      <td><%= item.quantity %></td>
-      <td><%= number_to_currency item.total %></td>
+      <th></th>
+      <th>Produto</th>
+      <th>$</th>
+      <th>Qtd</th>
+      <th>Total</th>
     </tr>
-  <% end %>
-  <tr>
-    <td colspan="4"></td>
-    <td><%= number_to_currency current_order.total %></td>
-  </tr>
+  </thead>
+  <tbody>
+    <%= render current_order.order_items %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4"></td>
+      <td><%= number_to_currency current_order.total %></td>
+    </tr>
+  </tfoot>
 </table>

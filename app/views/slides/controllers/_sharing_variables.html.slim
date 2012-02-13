@@ -68,6 +68,30 @@
               only: %w[index show]
             root to: "products#index"
           end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.45em; line-height: 1.3em"]
+        |
+          class ProductsControllerTest < ActionController::TestCase
+
+            setup do
+              @xaxa = Product.create name: 'Xaxá', price: 0.2
+              @soft = Product.create name: 'Soft', price: 0.3
+            end
+
+            test "should get index" do
+              get :index
+              assert_response :success
+              assert_select "ul#products" do
+                assert_select "li a[href=?]", product_path(@xaxa)
+                assert_select "li a[href=?]", product_path(@soft)
+              end
+            end
+
+          end
+
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
@@ -90,6 +114,39 @@
             <% end %>
           &lt;/ul>
 
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre[style="font-size:0.7em"]
+      | ruby -Itest test/functional/products_controller_test.rb
+
+.step.slide.shell[data-x=x_succ data-y=0]
+  q
+    pre
+      | 1 tests, 4 assertions,
+        0 failures, 0 errors, 0 skips
+    = image_tag "troll-happy.jpg", style: "float:right"
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.5em; line-height:1.2em"]
+        |
+          test "should get show" do
+            get :show, id: @xaxa
+            assert_response :success
+            assert_select "h1", "Xaxá"
+            assert_select "form" do
+              assert_select "[action=?]", order_items_path
+              assert_select "input" do
+                assert_select "[name=?]", "order_item[quantity]"
+                assert_select "[value=?]", "1"
+              end
+              assert_select "input" do
+                assert_select "[name=?]", "order_item[product_id]"
+                assert_select "[value=?]", @xaxa.id
+              end
+            end
+          end
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre

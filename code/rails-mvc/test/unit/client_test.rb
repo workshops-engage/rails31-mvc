@@ -1,8 +1,9 @@
+# encoding: UTF-8
 require 'test_helper'
 
 class ClientTest < ActiveSupport::TestCase
   def create_client
-    Client.create! name: "John", email: "john@gmail.com", password: 'tre543%$#', password_confirmation: 'tre543%$#'
+    @client = Client.create! name: "John", email: "john@gmail.com", password: 'tre543%$#', password_confirmation: 'tre543%$#'
   end
   test "validates presence of name" do
     client = Client.new name: nil
@@ -60,6 +61,13 @@ class ClientTest < ActiveSupport::TestCase
     assert ! client.valid?, "client should be invalid"
     assert client.errors[:password].any?
     assert_equal "too weak", client.errors[:password].first
+  end
+  test "auth" do
+    create_client
+    assert_equal nil, Client.auth(email: "wrong", password: 'wrong')
+    assert_equal nil, Client.auth(email: "john@gmail.com", password: 'wrong')
+    assert_equal nil, Client.auth(email: "wrong", password: 'tre543%$#')
+    assert_equal @client, Client.auth(email: "john@gmail.com", password: 'tre543%$#')
   end
 
 end

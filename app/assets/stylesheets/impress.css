@@ -537,3 +537,8 @@ small{
 pre code{
   font-family: 'Monaco' !important;
 }
+
+span.vbscript{
+  opacity: 1 !important;
+  color: #e60;
+}
